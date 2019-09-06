@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../partials/App.scss';
 import Nav from './Nav';
 import Form from './Form';
+import Results from './Results';
 
 class App extends Component {
   constructor () {
@@ -10,17 +11,10 @@ class App extends Component {
 
     this.state = {
       userInput: '',
+      sortOrder: '',
       searchResults: [],
-      name: '',
-      address: '',
-      thumbnail: '',
-      pageUrl: '',
-      rating: '',
-      votes: ''
     }
   }
-
-
 
   // ON UPDATE - COMPONENTDIDMOUNT
   componentDidMount () {
@@ -31,7 +25,7 @@ class App extends Component {
 
   }
 
-  getRestaurant = (userSearch, userSort) => {
+  getRestaurant = (userSearch, userSort, order) => {
     axios({
       method: 'Get',
       url: 'https://developers.zomato.com/api/v2.1/search?',
@@ -46,15 +40,17 @@ class App extends Component {
         category: '8',
         count: 6,
         sort: userSort,
+        order: order,
         q: userSearch
       }
     }).then((res) => {
-      // console.log(res)
+      console.log(res);
       const restaurantResults = res.data.restaurants.map((item) => {
         return {
           name: item.restaurant.name,
+          thumb: item.restaurant.featured_image,
           url: item.restaurant.url,
-          address: item.restaurant.location.adress,
+          address: item.restaurant.location.address,
           rating: item.restaurant.user_rating.aggregate_rating,
           votes: item.restaurant.user_rating.votes
         }
@@ -63,7 +59,7 @@ class App extends Component {
         searchResults: restaurantResults,
       })
 
-      console.log(this.state.searchResults)
+      // console.log(this.state.searchResults)
 
     })
   }
@@ -72,32 +68,30 @@ class App extends Component {
     this.setState({
       userInput: event.target.value,
     })
- 
+
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.getRestaurant(this.state.userInput, '')
+    this.getRestaurant(this.state.userInput, '', '')
     
 
 
     // this.setState({
-    //   userTextInput: '',
+    //   userInput: '',
     // })
   }
 
-  handleClick = (event, chosenCategory) => {
+  handleClick = (event, chosenCategory, sort) => {
     event.preventDefault();
     console.log('CLICKED')
-    console.log(chosenCategory)
-    this.setState({
-      userInput: chosenCategory
-    })
+    console.log(chosenCategory, sort)
 
-    this.getRestaurant('', this.state.userInput);
-
-
-
+    this.getRestaurant('', chosenCategory, sort);
+        this.setState({
+      userInput: chosenCategory,
+      sortOrder: sort
+    });
   }
 
 
@@ -106,8 +100,8 @@ class App extends Component {
     return (
       <div className="App">
         <Nav />
+      
 
-        <h1>logo</h1>
 
         <Form 
         userInput={this.state.userInput}
@@ -115,7 +109,11 @@ class App extends Component {
         handleSubmit={this.handleSubmit}
         handleClick={this.handleClick}
         />
-        
+
+      <Results 
+      searchResults={this.state.searchResults}
+      />
+
       </div>
     );
   }

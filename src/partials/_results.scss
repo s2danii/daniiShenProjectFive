@@ -1,0 +1,10 @@
+.resultSection .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    h2 {
+        width: 100%;
+    }
+    .restaurantItem {
+        width: calc(100% / 3);
+    }
+}
