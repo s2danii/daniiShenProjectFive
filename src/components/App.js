@@ -13,6 +13,7 @@ class App extends Component {
       userInput: '',
       sortOrder: '',
       searchResults: [],
+      searchOffset: -6
     }
   }
 
@@ -39,13 +40,16 @@ class App extends Component {
         entity_type: 'city',
         category: '8',
         count: 6,
+        start: this.state.searchOffset + 6,
         sort: userSort,
         order: order,
         q: userSearch
       }
     }).then((res) => {
-      console.log(res);
-      const restaurantResults = res.data.restaurants.map((item) => {
+      const originalResults = res.data.restaurants.filter((item) => {
+        return item.restaurant.user_rating.votes > 0
+      })
+      const restaurantResults = originalResults.map((item) => {
         return {
           name: item.restaurant.name,
           thumb: item.restaurant.featured_image,
@@ -57,6 +61,7 @@ class App extends Component {
       });
       this.setState({
         searchResults: restaurantResults,
+        searchOffset: this.state.searchOffset + 6
       })
 
       // console.log(this.state.searchResults)
@@ -94,13 +99,20 @@ class App extends Component {
     });
   }
 
+  // handleScroll = (event) => {
+  //   let lastResult = document.querySelector(".resultsGrid > div:last-child");
+  //   let lastResultOffset = lastResult.offsetTop + lastResult.clientHeight;
+  //   let pageOffset = window.pageYOffset + window.innerHeight;
+  //   if (lastResultOffset > pageOffset) {
+  //     this.getRestaurant
+  //   }
+  // }
 
   // WHERE EVERYTHING RENDERS
   render () {
     return (
       <div className="App">
         <Nav />
-      
 
 
         <Form 
@@ -112,7 +124,12 @@ class App extends Component {
 
       <Results 
       searchResults={this.state.searchResults}
+      userInput={this.state.userInput}
       />
+
+      <footer>
+        <p>Copyright stuffbydanii 2019</p>
+      </footer>
 
       </div>
     );

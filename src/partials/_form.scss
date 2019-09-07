@@ -1,11 +1,38 @@
 
+.searchForm {
+    input[type=text] {
+    padding: 10px 30px;
+    width: 30%;
+    margin: 3% 0 2%;
+    border-radius: 18px;
+    border: 1px solid $grey;
+    height: 40px;
+    font-size: 1.6rem;
+    }
+
+    button {
+        background: $red;
+        height: 40px;
+        border: none;
+        width: 70px;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: white;
+    }
+}
+
+
+
+
+
 .cost, .rating {
-    padding: 5px 0;
     text-align: center;
-    width: 70px;
+    font-size: 2rem;
+    width: 100px;
     display: inline-block;
     margin: 5px;
     background: $red;
-    color: $offWhite;
-    border-radius: 30px;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 0;
 }

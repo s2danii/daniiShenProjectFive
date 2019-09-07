@@ -1,7 +1,26 @@
 header {
-    background: linear-gradient(rgba(242,236,220,0.3), rgba(242,236,220,0.3)), url(../assets/header4.jpg);
-    background-position: left;
+    background: linear-gradient(to right, rgba(242,242,242, 0.8) 50%, rgba(242,242,242,0)), url(../assets/header.jpg);
+    background-position: right;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     height: 100vh;
+    border-bottom-right-radius: 20%;
+
+    .wrapper {
+        padding: 20% 0;
+    }
+
+    h1 {
+        font-size: 5rem;
+        font-weight: 900;
+    }
+
+    p {
+        color: $grey;
+        font-size: 1.6rem;
+    }
 }
+
+
 

@@ -10,24 +10,23 @@ class Form extends Component {
 
     render() {
         return (
-            <header className="searchForm">
+            <header>
                 <div className="wrapper">
-                    <h1>logo</h1>
-                    <form action="">
+                    <h1>brunch.TO</h1>
+                    <p>Find and save the top brunch places in Toronto</p>
+                    <p>(so you'll always have a back-up plan for your Sunday morning)</p>
+                    <form className="searchForm" action="">
                         <label id="searchBar" className="visuallyHidden">Search for a brunch restaurant here</label>
                         <input type="text"
                             id="searchBar"
                             onChange={this.props.handleChange}
                             value={this.props.userInput}
                             placeholder="Find me some brunch" />
-                        {/* <select name="sortBy" id="sortBy">
-                    <option value="rating">Rating</option>
-                    <option value="cost">Cost</option>
-                </select> */}
                         <button onClick={this.props.handleSubmit}>
                             <i className="fas fa-search"></i>
                         </button>
                     </form>
+                    <p>or search the city by rating and price:</p>
                     <a href=""
                         onClick={(e) => this.props.handleClick(e, 'rating', 'desc')}
                         className="rating">

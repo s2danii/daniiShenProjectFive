@@ -1,16 +1,36 @@
 $offWhite: rgb(242,242,242);
 $white: rgb(242,236,220);
 $red: rgb(229,91,91);
+$shadow: rgba(210,202,202, 0.3);
+$grey: rgb(89,101,129);
+$blue: rgb(23, 36, 66);
+$font: 'Lato', sans-serif;
 
+html {
+    font-size: 62.5%;
+}
 
+body {
+    font-family: $font;
+    font-size: 1.4rem;
+}
 .wrapper {
-    width: 85%;
+    width: 80%;
     max-width: 1280px;
     margin: 0 auto;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    color: $blue;
+    font-family: 'Poppins', sans-serif;
+}
+
 div {
-    border: 2px solid tomato;
+    // border: 2px solid tomato;
 }
 
 img {

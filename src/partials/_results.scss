@@ -1,10 +1,63 @@
-.resultSection .wrapper {
-    display: flex;
-    flex-wrap: wrap;
+.resultSection {
+    padding: 10vh 0;    
     h2 {
-        width: 100%;
+        text-align: center;
+        padding: 50px 0;
+        font-size: 3rem;
     }
+}
+
+.resultsGrid {
+    // display: flex;
+    // flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fit, minmax(420px, 0.3fr));
+    grid-auto-rows: minmax(420px, 0.3fr);
+    grid-gap: 20px;
+
     .restaurantItem {
-        width: calc(100% / 3);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 2px 2px 8px 2px $shadow;
+        .restaurantImage {
+            height: 50%;
+            position: relative;
+            
+            img {
+                height: 100%;
+                object-fit: cover;
+                
+            }
+            
+        }
+
+        .favourite {
+            background: $red;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            width: 45px;
+            font-size: 20px;
+            border-radius: 50%;
+            border: none;
+            position: absolute;
+            bottom: -18px;
+            right: 8%;
+            box-shadow: 0 3px 3px rgb(210,202,202);
+        }
+
+        .restaurantInfo {
+            padding: 8%;
+            .fas {
+                color: $red;
+            }
+
+            p {
+                color: $grey;
+            }
+        }
     }
 }
