@@ -5,6 +5,7 @@ class Nav extends Component {
     render () {
         return (
             <nav>
+                <h3 className="logo">brunch.TO</h3>
                 <ul>
                     <li>
                         <a href="http://" title="Search"><i className="fas fa-search"></i></a>

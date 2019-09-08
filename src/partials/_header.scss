@@ -1,5 +1,6 @@
 header {
     background: linear-gradient(to right, rgba(242,242,242, 0.8) 50%, rgba(242,242,242,0)), url(../assets/header.jpg);
+    transition: all ease-out 2s;
     background-position: right;
     background-size: cover;
     background-repeat: no-repeat;
@@ -18,15 +19,59 @@ header {
         background-attachment: fixed;
     }
 
+    @media (max-width: 700px) {
+        background: rgb(255,214,114);
+        background-attachment: fixed;
+    }
+
+    .egg {
+        width: 150px;
+        display: none;
+
+        @media (max-width: 700px) {
+            display: inline-block;
+        }
+
+        @media (max-width: 500px) {
+            width: 125px;
+        }
+
+    }
+
+    .wrapper {
+        @media (max-width: 1000px) {
+            margin-left: 100px;
+        }
+
+        @media (max-width: 700px) {
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
+
     h1 {
         font-size: 5rem;
         font-weight: 900;
+
+        @media (max-width: 700px) {
+            display: none;
+        }
+        
     }
 
     p {
         color: $grey;
-        font-size: 1.8rem;
+        font-size: calc(1.6rem + (18 - 16)*(100vw - 700px)/(1280 - 700));
 
+        @media (max-width: 700px) {
+            font-size: 1.6rem;
+
+            &:nth-of-type(2) {
+                display: none;
+            }
+        }
+
+        
     }
 }
 

@@ -9,6 +9,22 @@
     height: 40px;
     font-size: 1.6rem;
     text-transform: capitalize;
+
+    @media (max-width: 1000px) {
+        width: 230px;
+    }
+
+    @media (max-width: 700px) {
+        width: 50%;
+    }
+
+    @media (max-width: 500px) {
+        display: block;
+        width: 90%;
+        margin: 3% auto 2%;
+        text-align: center;
+    }
+
     }
 
     button {
@@ -20,6 +36,11 @@
         margin-left: 10px;
         color: white;
         font-size: 1.8rem;
+        @include buttonShadow;
+
+        @media (max-width: 500px) {
+            width: 100px;
+        }
     }
 }
 
@@ -33,4 +54,5 @@
     color: white;
     border-radius: 20px;
     padding: 8px 0;
+    @include buttonShadow;
 }

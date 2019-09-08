@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Egg from '../assets/egg.png';
 
 
 class Form extends Component {
@@ -6,12 +7,11 @@ class Form extends Component {
         super ();
     }
 
-
-
     render() {
         return (
                 <div className="wrapper">
                     <h1>brunch.TO</h1>
+                    <img className="egg" src={Egg} alt=""/>
                     <p>Find and save the top brunch spots in Toronto</p>
                     <p>(so you'll always have a back-up plan for your Sunday morning)</p>
                     <form className="searchForm" action="">
@@ -26,7 +26,7 @@ class Form extends Component {
                             <i className="fas fa-search"></i>
                         </button>
                     </form>
-                    <p>Or search the city by rating and price:</p>
+                    <p>Or search by rating and price:</p>
                     <a href=""
                     title="Search by rating"
                     onClick={(e) => this.props.handleClick(e, 'rating', 'desc')}

@@ -5,6 +5,7 @@ import Nav from './Nav';
 import Form from './Form';
 import Results from './Results';
 
+
 class App extends Component {
   constructor () {
     super ();
@@ -20,12 +21,13 @@ class App extends Component {
 
   // ON UPDATE - COMPONENTDIDMOUNT
   componentDidMount () {
-
-
-
-
+      window.addEventListener('scroll', this.handleScroll);
 
   }
+
+  componentWillUnmount () {
+  window.removeEventListener('scroll', this.handleScroll);
+}
 
   getRestaurant = (userSearch, userSort, order) => {
     axios({
@@ -51,16 +53,7 @@ class App extends Component {
         return item.restaurant.user_rating.votes > 0
       })
 
-      // originalResults.forEach((item) => {
-      //   if (item.restaurant.thumb === '') {
-      //     item.restaurant.thumb = '../src/assets/imagePlaceholder.jpg'
-      //   }
-      // })
-
       const restaurantResults = originalResults.map((item) => {
-        if (item.restaurant.featured_image === '') {
-          item.restaurant.featured_image = "../src/assets/imagePlaceholder.jpg"
-        }
         return {
           name: item.restaurant.name,
           thumb: item.restaurant.featured_image,
@@ -68,16 +61,21 @@ class App extends Component {
           address: item.restaurant.location.address,
           rating: item.restaurant.user_rating.aggregate_rating,
           votes: item.restaurant.user_rating.votes
-        }
- 
+        }        
       });
+
       this.setState({
         searchResults: restaurantResults,
         visible: !this.setState.visible
       })
 
+      this.smoothScroll();
 
     })
+  }
+
+  smoothScroll = () => {
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start', duration: 4000 });
   }
 
   handleChange = event => {
@@ -94,24 +92,29 @@ class App extends Component {
 
   handleClick = (event, chosenCategory, sort) => {
     event.preventDefault();
-
     this.getRestaurant('', chosenCategory, sort);
+    
         this.setState({
       userInput: chosenCategory,
       sortOrder: sort
     });
   }
 
-    handleScroll = (event) => {
-      console.log(element.scrollHeight, element.scrollTop)
-      const element = event.target
-      
-      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-        this.setState ({
-          backUp: !this.setState.backUp
-        })
-      }
+  handleScroll = () => {
+    let element = document.getElementById('resultSection')
+
+    if (element && window.pageYOffset > element.offsetTop) {
+      this.setState({
+          backUp: true
+      })
+    } else {
+      this.setState({
+        backUp: false
+      })
     }
+  }
+
+
 
   // WHERE EVERYTHING RENDERS
   render () {
@@ -119,7 +122,7 @@ class App extends Component {
       <div className="App">
         <Nav />
 
-        <header>
+        <header id='header'>
           <Form
             userInput={this.state.userInput}
             handleChange={this.handleChange}
@@ -127,6 +130,7 @@ class App extends Component {
             handleClick={this.handleClick}
           />
         </header>
+
 
         {this.state.visible && <Results
           searchResults={this.state.searchResults}

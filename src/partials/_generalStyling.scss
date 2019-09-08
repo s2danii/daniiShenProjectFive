@@ -6,6 +6,17 @@ $grey: rgb(89,101,129);
 $blue: rgb(23, 36, 66);
 $font: 'Lato', sans-serif;
 
+@mixin buttonShadow {
+    box-shadow: 0 3px 3px rgb(210,202,202);
+}
+
+@mixin header-image($header-image) {
+    background: $header-image;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
 html {
     font-size: 62.5%;
 }
