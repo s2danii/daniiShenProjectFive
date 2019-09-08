@@ -8,6 +8,7 @@
     border: 1px solid $grey;
     height: 40px;
     font-size: 1.6rem;
+    text-transform: capitalize;
     }
 
     button {
@@ -18,12 +19,9 @@
         border-radius: 20px;
         margin-left: 10px;
         color: white;
+        font-size: 1.8rem;
     }
 }
-
-
-
-
 
 .cost, .rating {
     text-align: center;

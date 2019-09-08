@@ -13,7 +13,8 @@ class App extends Component {
       userInput: '',
       sortOrder: '',
       searchResults: [],
-      searchOffset: -6
+      backUp: false,
+      visible: false
     }
   }
 
@@ -39,7 +40,7 @@ class App extends Component {
         entity_id: 89,
         entity_type: 'city',
         category: '8',
-        count: 6,
+        // count: 6,
         start: this.state.searchOffset + 6,
         sort: userSort,
         order: order,
@@ -49,7 +50,17 @@ class App extends Component {
       const originalResults = res.data.restaurants.filter((item) => {
         return item.restaurant.user_rating.votes > 0
       })
+
+      // originalResults.forEach((item) => {
+      //   if (item.restaurant.thumb === '') {
+      //     item.restaurant.thumb = '../src/assets/imagePlaceholder.jpg'
+      //   }
+      // })
+
       const restaurantResults = originalResults.map((item) => {
+        if (item.restaurant.featured_image === '') {
+          item.restaurant.featured_image = "../src/assets/imagePlaceholder.jpg"
+        }
         return {
           name: item.restaurant.name,
           thumb: item.restaurant.featured_image,
@@ -58,13 +69,13 @@ class App extends Component {
           rating: item.restaurant.user_rating.aggregate_rating,
           votes: item.restaurant.user_rating.votes
         }
+ 
       });
       this.setState({
         searchResults: restaurantResults,
-        searchOffset: this.state.searchOffset + 6
+        visible: !this.setState.visible
       })
 
-      // console.log(this.state.searchResults)
 
     })
   }
@@ -79,18 +90,10 @@ class App extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.getRestaurant(this.state.userInput, '', '')
-    
-
-
-    // this.setState({
-    //   userInput: '',
-    // })
   }
 
   handleClick = (event, chosenCategory, sort) => {
     event.preventDefault();
-    console.log('CLICKED')
-    console.log(chosenCategory, sort)
 
     this.getRestaurant('', chosenCategory, sort);
         this.setState({
@@ -99,14 +102,16 @@ class App extends Component {
     });
   }
 
-  // handleScroll = (event) => {
-  //   let lastResult = document.querySelector(".resultsGrid > div:last-child");
-  //   let lastResultOffset = lastResult.offsetTop + lastResult.clientHeight;
-  //   let pageOffset = window.pageYOffset + window.innerHeight;
-  //   if (lastResultOffset > pageOffset) {
-  //     this.getRestaurant
-  //   }
-  // }
+    handleScroll = (event) => {
+      console.log(element.scrollHeight, element.scrollTop)
+      const element = event.target
+      
+      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+        this.setState ({
+          backUp: !this.setState.backUp
+        })
+      }
+    }
 
   // WHERE EVERYTHING RENDERS
   render () {
@@ -114,18 +119,21 @@ class App extends Component {
       <div className="App">
         <Nav />
 
+        <header>
+          <Form
+            userInput={this.state.userInput}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            handleClick={this.handleClick}
+          />
+        </header>
 
-        <Form 
-        userInput={this.state.userInput}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        handleClick={this.handleClick}
-        />
-
-      <Results 
-      searchResults={this.state.searchResults}
-      userInput={this.state.userInput}
-      />
+        {this.state.visible && <Results
+          searchResults={this.state.searchResults}
+          userInput={this.state.userInput}
+          backUp={this.state.backUp}
+          handleScroll={this.handleScroll}
+        />}
 
       <footer>
         <p>Copyright stuffbydanii 2019</p>

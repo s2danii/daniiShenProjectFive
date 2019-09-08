@@ -2,8 +2,19 @@
     padding: 10vh 0;    
     h2 {
         text-align: center;
-        padding: 50px 0;
+        padding-top: 50px;
         font-size: 3rem;
+        text-transform: capitalize;
+        &+ p {
+        text-align: center;
+        padding-bottom: 50px;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $grey;
+        text-transform: capitalize;
+    }
+
     }
 }
 
@@ -47,17 +58,29 @@
             bottom: -18px;
             right: 8%;
             box-shadow: 0 3px 3px rgb(210,202,202);
-        }
 
-        .restaurantInfo {
-            padding: 8%;
-            .fas {
-                color: $red;
-            }
-
-            p {
-                color: $grey;
+            &:hover {
+                background: rgb(236,140,140);
             }
         }
     }
+}
+
+
+.restaurantInfo {
+    padding: 8%;
+    .fas {
+        color: $red;
+    }
+
+    p {
+        color: $grey;
+    }
+}
+
+.upButton {
+    background: $red;
+    color: white;
+    height: 60px;
+    width: 60px;
 }
