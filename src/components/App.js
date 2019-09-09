@@ -4,7 +4,8 @@ import '../partials/App.scss';
 import Nav from './Nav';
 import Form from './Form';
 import Results from './Results';
-
+import Favourites from './Favourites';
+import firebase from './firebase';
 
 class App extends Component {
   constructor () {
@@ -15,14 +16,35 @@ class App extends Component {
       sortOrder: '',
       searchResults: [],
       backUp: false,
-      visible: false
+      visible: false,
+      searchOn: true,
+      favouriteOn: false,
+      favePlaces: [],
+      addPlace: true,
+      removePlace: false,
     }
   }
 
   // ON UPDATE - COMPONENTDIDMOUNT
   componentDidMount () {
-      window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
 
+    // firebase call to retrieve data from database
+    const dbref = firebase.database().ref();
+    dbref.on('value', (response) => {
+      const newFavePlaces = [];
+      const data = response.val();
+
+      for (let item in data) {
+        newFavePlaces.push(data[item]);
+      }
+
+      this.setState({
+        favePlaces: newFavePlaces
+      });
+
+      console.log(this.state.favePlaces)
+    })
   }
 
   componentWillUnmount () {
@@ -75,7 +97,7 @@ class App extends Component {
   }
 
   smoothScroll = () => {
-    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start', duration: 4000 });
+    document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   handleChange = event => {
@@ -114,34 +136,72 @@ class App extends Component {
     }
   }
 
+  faveClick = (event, restaurantItem, restaurantName) => {
+    event.preventDefault();
+    const dbRef = firebase.database().ref(restaurantName);
+    dbRef.update({...restaurantItem})
+  }
 
+  deleteClick = (event, restaurantName) => {
+    event.preventDefault();
+    const dbRef = firebase.database().ref();
+    dbRef.child(restaurantName).remove();
+    // console.log(restaurantItem);
+
+  }
+
+  favePage = (event) => {
+    event.preventDefault();
+    this.setState({
+      searchOn: false,
+      visible: false,
+      favouriteOn: true
+    })
+  }
+
+  searchPage =(event) => {
+    event.preventDefault();
+    this.setState({
+      searchOn: true,
+      favouriteOn: false
+    })
+  }
 
   // WHERE EVERYTHING RENDERS
   render () {
     return (
       <div className="App">
-        <Nav />
+        <Nav 
+        favePage={this.favePage}
+        searchPage={this.searchPage}
+        searchOn={this.state.searchOn}/>
 
-        <header id='header'>
-          <Form
+        
+          {this.state.searchOn && <Form
             userInput={this.state.userInput}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
             handleClick={this.handleClick}
-          />
-        </header>
-
-
+          />}
+          
+        
         {this.state.visible && <Results
           searchResults={this.state.searchResults}
           userInput={this.state.userInput}
           backUp={this.state.backUp}
           handleScroll={this.handleScroll}
+          addPlace={this.state.addPlace}
+          removePlace={this.state.removePlace}
+          faveClick={this.faveClick}
+          deleteClick={this.deleteClick}
+          searchOn={this.state.searchOn}
         />}
 
-      <footer>
-        <p>Copyright stuffbydanii 2019</p>
-      </footer>
+        {this.state.favouriteOn && <Favourites 
+        favePlaces={this.state.favePlaces}
+        deleteClick={this.deleteClick}
+        searchOn={this.state.searchOn}
+        />}
 
       </div>
     );

@@ -9,6 +9,7 @@ class Form extends Component {
 
     render() {
         return (
+            <header id="header" className="mainHeader">
                 <div className="wrapper">
                     <h1>brunch.TO</h1>
                     <img className="egg" src={Egg} alt=""/>
@@ -41,6 +42,7 @@ class Form extends Component {
                         <i className="fas fa-dollar-sign"></i>
                     </a>
                 </div>
+            </header>
         );
     }
 }

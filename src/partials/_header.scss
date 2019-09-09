@@ -1,42 +1,8 @@
+// GENERAL HEADER STYLING
 header {
-    background: linear-gradient(to right, rgba(242,242,242, 0.8) 50%, rgba(242,242,242,0)), url(../assets/header.jpg);
-    transition: all ease-out 2s;
-    background-position: right;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh;
-    border-bottom-right-radius: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 1000px) {
-        background: linear-gradient(to right, rgba(242,242,242, 0.8), rgba(242,242,242,0.8)), url(../assets/header.jpg);
-        background-position: right;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-
-    @media (max-width: 700px) {
-        background: rgb(255,214,114);
-        background-attachment: fixed;
-    }
-
-    .egg {
-        width: 150px;
-        display: none;
-
-        @media (max-width: 700px) {
-            display: inline-block;
-        }
-
-        @media (max-width: 500px) {
-            width: 125px;
-        }
-
-    }
 
     .wrapper {
         @media (max-width: 1000px) {
@@ -48,10 +14,55 @@ header {
             margin: 0 auto;
         }
     }
+}
+
+.egg {
+    width: 150px;
+    padding-top: 40px;
+
+    @media (max-width: 500px) {
+        width: 125px;
+    }
+}
+
+.mainHeader .egg {
+    display: none;
+
+    @media (max-width: 700px) {
+        display: inline-block;
+    }
+
+}
+
+// MAIN PAGE HEADER
+
+.mainHeader {
+    background: linear-gradient(to right, rgba(242,242,242, 0.8) 50%, rgba(242,242,242,0)), url(../assets/header.jpg);
+    transition: all ease-out 1.5s;
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    border-bottom-right-radius: 20%;
+
+
+    @media (max-width: 1000px) {
+        background: linear-gradient(to right, rgba(242,242,242, 0.9) 70%, rgba(242,242,242,0)), url(../assets/header.jpg);
+        background-position: right;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    @media (max-width: 700px) {
+        background: rgb(255,214,114);
+        background-attachment: fixed;
+    }
 
     h1 {
-        font-size: 5rem;
-        font-weight: 900;
+        font-size: 4rem;
+        font-weight: 700;
 
         @media (max-width: 700px) {
             display: none;
@@ -72,6 +83,35 @@ header {
         }
 
         
+    }
+}
+
+
+// FAVOURITE PAGE HEADER
+
+.faveHeader {
+    background: rgb(255,214,114);
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10vh;
+
+    }
+
+    h2 {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 3rem;
+    text-transform: capitalize;
+
+    &+ p{
+        text-align: center;
+        font-size: 1.6rem;
+        padding-bottom: 50px;
+    }
     }
 }
 

@@ -29,11 +29,10 @@ nav {
 
     li {
         list-style: none;
-        border-left: 4px solid $red;
+        
 
         @media (max-width: 700px) {
-            border-left: none;
-            border-bottom: 4px solid $red;
+            
         }
 
         
@@ -43,30 +42,37 @@ nav {
             display: inline-block;
             color: white;
             font-size: 1.8rem;
+            border-left: 4px solid $red;
 
             @media (max-width: 700px) {
                 padding: 15px 30px;
-            }
-        }
-
-        &:nth-of-type(1) {
-            border-left: 4px solid white;
-
-            @media (max-width: 700px) {
                 border-left: none;
-                border-bottom: 4px solid white;
+                border-bottom: 4px solid $red;
+            }
+
+            &:hover {
+                border-left: 4px solid white;
+
+                @media (max-width: 700px) {
+                    border-left: none;
+                    border-bottom: 4px solid white;
+                }
             }
         }
 
-        &:hover {
-            border-left: 4px solid white;
+        
 
-            @media (max-width: 700px) {
-                border-left: none;
-                border-bottom: 4px solid white;
-            }
-        }
+
     }
+
+    .currentPage {
+            border-left: 4px solid white;
+
+            @media (max-width: 700px) {
+                border-left: none;
+                border-bottom: 4px solid white;
+            }
+        }
 }
 
 .logo {
