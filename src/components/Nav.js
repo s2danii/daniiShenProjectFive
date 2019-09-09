@@ -8,10 +8,10 @@ class Nav extends Component {
                 <h3 className="logo">brunch.TO</h3>
                 <ul>
                     <li>
-                        <a href="http://" title="Search"><i className="fas fa-search"></i></a>
+                        <a href="http://" title="Search" onClick={this.props.searchButton}><i className="fas fa-search"></i></a>
                     </li>
                     <li>
-                        <a href="http://" title="Favorites"><i className="fas fa-bookmark"></i></a>
+                        <a href="http://" title="Favorites" onClick={this.props.faveButton}><i className="fas fa-bookmark"></i></a>
                     </li>
                 </ul>
             </nav>

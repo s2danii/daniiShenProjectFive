@@ -5,10 +5,13 @@ $shadow: rgba(210,202,202, 0.3);
 $grey: rgb(89,101,129);
 $blue: rgb(23, 36, 66);
 $font: 'Lato', sans-serif;
+$greyShadow: rgb(210,202,202);
+$yellowShadow: rgb(206,172,91);
 
-@mixin buttonShadow {
-    box-shadow: 0 3px 3px rgb(210,202,202);
+@mixin buttonShadow ($colour) {
+    box-shadow: 0 3px 3px $colour;
 }
+
 
 @mixin header-image($header-image) {
     background: $header-image;
