@@ -12,7 +12,7 @@ class ResultItem extends Component {
                     <div className="restaurantItem" key={index} >
                         <div className="restaurantImage">
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
-                            <button className="favourite" title="Add to favorites" onClick={this.props.searchOn? ((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name)) : ((e) => this.props.deleteClick(e, restaurantItem.name))}>
+                            <button className="favourite" title={this.props.searchOn? 'Add to favourites': 'Remove from favourites'} onClick={this.props.searchOn? ((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name)) : ((e) => this.props.deleteClick(e, restaurantItem.name))}>
                                 <i className={this.props.searchOn ? "fas fa-plus" : "fas fa-minus"}></i>
                             </button>
                         </div>

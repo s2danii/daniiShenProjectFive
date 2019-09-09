@@ -12,7 +12,6 @@ $yellowShadow: rgb(206,172,91);
     box-shadow: 0 3px 3px $colour;
 }
 
-
 @mixin header-image($header-image) {
     background: $header-image;
     background-repeat: no-repeat;

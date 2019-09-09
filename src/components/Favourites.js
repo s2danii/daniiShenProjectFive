@@ -4,7 +4,6 @@ import Egg from '../assets/egg.png';
 
 class Favourites extends Component {
 
-
     render () {
         return (
             <div className="favePage">
@@ -17,6 +16,7 @@ class Favourites extends Component {
                 </header>
                 <section className="faveSection">
                     <div className="wrapper">
+                        {this.props.favePlaces.length < 1 && <p>No items saved yet!</p>}
                         <div className="faveGrid">
                             <ResultItem
                                 restaurantArray={this.props.favePlaces}

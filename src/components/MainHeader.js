@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Egg from '../assets/egg.png';
 
-
-class Form extends Component {
+class MainHeader extends Component {
     constructor () {
         super ();
     }
 
     render() {
         return (
-            <header id="header" className="mainHeader">
+            <header ref={this.props.headerRef} className="mainHeader">
                 <div className="wrapper">
                     <h1>brunch.TO</h1>
                     <img className="egg" src={Egg} alt=""/>
@@ -28,15 +27,13 @@ class Form extends Component {
                         </button>
                     </form>
                     <p>Or search by rating and price:</p>
-                    <a href=""
-                    title="Search by rating"
+                    <a title="Search by rating"
                     onClick={(e) => this.props.handleClick(e, 'rating', 'desc')}
                     className="rating">
                         <i className="fas fa-star"></i>
                     </a>
 
-                    <a href=""
-                    title="Search by cost"
+                    <a title="Search by cost"
                     onClick={(e) => this.props.handleClick(e, 'cost', 'asc')}
                     className="cost">
                         <i className="fas fa-dollar-sign"></i>
@@ -47,4 +44,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default MainHeader;
