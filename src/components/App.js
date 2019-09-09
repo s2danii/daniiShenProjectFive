@@ -15,6 +15,7 @@ class App extends Component {
       userInput: '',
       sortOrder: '',
       searchResults: [],
+      resultCount: 0,
       backUp: false,
       visible: false,
       searchOn: true,
@@ -22,6 +23,7 @@ class App extends Component {
       favePlaces: [],
       addPlace: true,
       removePlace: false,
+      axiosParams:[],
     }
 
     this.resultsRef = React.createRef();
@@ -68,11 +70,14 @@ class App extends Component {
         entity_id: 89,
         entity_type: 'city',
         category: '8',
+        start: this.state.resultCount,
         sort: userSort,
         order: order,
         q: userSearch
       }
     }).then((res) => {
+
+      console.log(res)
       // filtering out any results with no votes
       const originalResults = res.data.restaurants.filter((item) => {
         return item.restaurant.user_rating.votes > 0
@@ -89,12 +94,19 @@ class App extends Component {
         }        
       });
 
+      console.log(restaurantResults)
+
       this.setState({
-        searchResults: restaurantResults,
-        visible: !this.setState.visible,
+        searchResults: this.state.searchResults.concat(restaurantResults),
+        visible: true,
+        resultCount: this.state.resultCount + 20,
+        axiosParams: [userSearch, userSort, order]
       })
 
-      this.smoothScroll();
+      if (this.state.resultCount === 20) {
+        this.smoothScroll();
+      }
+      
     })
   }
 
@@ -168,12 +180,18 @@ class App extends Component {
   }
 
   // function to change state to render search page instead of favourite page
-  searchPage =(event) => {
+  searchPage = (event) => {
     event.preventDefault();
     this.setState({
       searchOn: true,
       favouriteOn: false
     })
+  }
+
+  moreResults = (event) => {
+    event.preventDefault();
+    console.log(this.state.axiosParams[0], this.state.axiosParams[1], this.state.axiosParams[2])
+    this.getRestaurant(this.state.axiosParams[0], this.state.axiosParams[1], this.state.axiosParams[2]);
   }
 
   // WHERE EVERYTHING RENDERS
@@ -187,14 +205,8 @@ class App extends Component {
         searchPage={this.searchPage}
         searchOn={this.state.searchOn}/>
 
-<<<<<<< HEAD
         
           {this.state.searchOn && <MainHeader
-=======
-        {/* Mainpage Header */}
-          {this.state.searchOn && <MainHeader
-            headerRef={this.headerRef}
->>>>>>> firebase
             userInput={this.state.userInput}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
@@ -214,6 +226,7 @@ class App extends Component {
           faveClick={this.faveClick}
           deleteClick={this.deleteClick}
           searchOn={this.state.searchOn}
+          moreResults={this.moreResults}
         />}
 
         {/* Favourites Page */}

@@ -23,6 +23,7 @@ class Results extends Component {
                                 deleteClick={this.props.deleteClick}
                                 searchOn={this.props.searchOn}/>
                             </div>
+                            <button className="moreResults" onClick={this.props.moreResults}>More results</button>
                         </div>
                     </main>
                     

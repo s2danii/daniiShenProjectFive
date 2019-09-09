@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Egg from '../assets/egg.png';
 
-<<<<<<< HEAD:src/components/MainHeader.js
-
-=======
->>>>>>> firebase:src/components/Form.js
 class MainHeader extends Component {
     constructor () {
         super ();
