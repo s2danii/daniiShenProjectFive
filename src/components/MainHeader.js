@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Egg from '../assets/egg.png';
 
 
-class Form extends Component {
+class MainHeader extends Component {
     constructor () {
         super ();
     }
@@ -47,4 +47,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default MainHeader;

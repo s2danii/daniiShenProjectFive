@@ -4,7 +4,6 @@ import Egg from '../assets/egg.png';
 
 class Favourites extends Component {
 
-
     render () {
         return (
             <div className="favePage">

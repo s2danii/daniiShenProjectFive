@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import '../partials/App.scss';
 import Nav from './Nav';
-import Form from './Form';
+import MainHeader from './MainHeader';
 import Results from './Results';
 import Favourites from './Favourites';
 import firebase from './firebase';
@@ -177,7 +177,7 @@ class App extends Component {
         searchOn={this.state.searchOn}/>
 
         
-          {this.state.searchOn && <Form
+          {this.state.searchOn && <MainHeader
             userInput={this.state.userInput}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}

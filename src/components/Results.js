@@ -20,25 +20,6 @@ class Results extends Component {
                                 faveClick={this.props.faveClick}
                                 deleteClick={this.props.deleteClick}
                                 searchOn={this.props.searchOn}/>
-                                {/* {this.props.searchResults.map((restaurantItem, index) => {
-
-                                    return (
-                                        <div className="restaurantItem" key={index} >
-                                            <div className="restaurantImage">
-                                                <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
-                                                <button className="favourite" title="Add to favorites">
-                                                    <i className="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-
-                                            <div className="restaurantInfo">
-                                                <h3>{restaurantItem.name}</h3>
-                                                <p><i className="fas fa-star"></i> {restaurantItem.rating} ({restaurantItem.votes} votes)</p>
-                                                <p>{restaurantItem.address}</p>
-                                            </div>
-                                        </div>
-                                    );
-                                })} */}
                             </div>
 
 
