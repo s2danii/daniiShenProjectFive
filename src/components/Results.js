@@ -8,10 +8,12 @@ class Results extends Component {
         render () {
             return (
                 <div>
-                    <main className="resultSection"
-                        id="resultSection">
+                    <main
+                    ref={this.props.resultsRef}
+                    className="resultSection">
                         <div className="wrapper">
-                            {this.props.backUp && <BackUpButton />}
+                            {this.props.backUp && <BackUpButton
+                            headerRef={this.props.headerRef}/>}
                             <h2>{(this.props.searchResults.length > 0)? 'Your brunch results' : 'Sorry No results found'}</h2>
                             <p>Based on '{this.props.userInput}'</p>
                             <div className="resultsGrid">
@@ -21,8 +23,6 @@ class Results extends Component {
                                 deleteClick={this.props.deleteClick}
                                 searchOn={this.props.searchOn}/>
                             </div>
-
-
                         </div>
                     </main>
                     
@@ -30,12 +30,8 @@ class Results extends Component {
                         <p>Copyright stuffbydanii 2019</p>
                     </footer>
                 </div>
-                
-                
-                
             );
-        }
-        
+        } 
     }
 
 export default Results;

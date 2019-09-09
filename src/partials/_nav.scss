@@ -1,3 +1,5 @@
+// NAVIGATION BAR STYLING
+
 nav {
     position: fixed;
     background: $red;
@@ -30,13 +32,10 @@ nav {
     li {
         list-style: none;
         
-
         @media (max-width: 700px) {
             
         }
-
         
-
         a {
             padding: 30px 20px;
             display: inline-block;
@@ -58,21 +57,17 @@ nav {
                     border-bottom: 4px solid white;
                 }
             }
-        }
-
-        
-
-
+        }        
     }
 
     .currentPage {
-            border-left: 4px solid white;
+        border-left: 4px solid white;
 
-            @media (max-width: 700px) {
-                border-left: none;
-                border-bottom: 4px solid white;
-            }
+        @media (max-width: 700px) {
+            border-left: none;
+            border-bottom: 4px solid white;
         }
+    }
 }
 
 .logo {
