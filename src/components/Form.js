@@ -9,7 +9,7 @@ class Form extends Component {
 
     render() {
         return (
-            <header id="header">
+            <header id="header" className="mainHeader">
                 <div className="wrapper">
                     <h1>brunch.TO</h1>
                     <img className="egg" src={Egg} alt=""/>

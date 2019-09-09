@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import BackUpButton from './BackUp';
-import ImagePlaceholder from '../assets/imagePlaceholder.jpg';
 import ResultItem from './ResultItem';
 
 
@@ -18,7 +17,9 @@ class Results extends Component {
                             <div className="resultsGrid">
                                 <ResultItem
                                 restaurantArray={this.props.searchResults}
-                                faveClick={this.props.faveClick}/>
+                                faveClick={this.props.faveClick}
+                                deleteClick={this.props.deleteClick}
+                                searchOn={this.props.searchOn}/>
                                 {/* {this.props.searchResults.map((restaurantItem, index) => {
 
                                     return (

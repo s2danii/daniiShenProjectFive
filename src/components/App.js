@@ -18,8 +18,10 @@ class App extends Component {
       backUp: false,
       visible: false,
       searchOn: true,
-      favouritePage: false,
+      favouriteOn: false,
       favePlaces: [],
+      addPlace: true,
+      removePlace: false,
     }
   }
 
@@ -27,6 +29,7 @@ class App extends Component {
   componentDidMount () {
     window.addEventListener('scroll', this.handleScroll);
 
+    // firebase call to retrieve data from database
     const dbref = firebase.database().ref();
     dbref.on('value', (response) => {
       const newFavePlaces = [];
@@ -39,6 +42,8 @@ class App extends Component {
       this.setState({
         favePlaces: newFavePlaces
       });
+
+      console.log(this.state.favePlaces)
     })
   }
 
@@ -131,10 +136,18 @@ class App extends Component {
     }
   }
 
-  faveClick = (event, restaurantItem) => {
+  faveClick = (event, restaurantItem, restaurantName) => {
+    event.preventDefault();
+    const dbRef = firebase.database().ref(restaurantName);
+    dbRef.update({...restaurantItem})
+  }
+
+  deleteClick = (event, restaurantName) => {
     event.preventDefault();
     const dbRef = firebase.database().ref();
-    dbRef.push({...restaurantItem})
+    dbRef.child(restaurantName).remove();
+    // console.log(restaurantItem);
+
   }
 
   favePage = (event) => {
@@ -142,7 +155,7 @@ class App extends Component {
     this.setState({
       searchOn: false,
       visible: false,
-      favouritePage: true
+      favouriteOn: true
     })
   }
 
@@ -150,7 +163,7 @@ class App extends Component {
     event.preventDefault();
     this.setState({
       searchOn: true,
-      favouritePage: false
+      favouriteOn: false
     })
   }
 
@@ -159,8 +172,9 @@ class App extends Component {
     return (
       <div className="App">
         <Nav 
-        faveButton={this.favePage}
-        searchButton={this.searchPage}/>
+        favePage={this.favePage}
+        searchPage={this.searchPage}
+        searchOn={this.state.searchOn}/>
 
         
           {this.state.searchOn && <Form
@@ -171,18 +185,23 @@ class App extends Component {
           />}
           
         
-
-
         {this.state.visible && <Results
           searchResults={this.state.searchResults}
           userInput={this.state.userInput}
           backUp={this.state.backUp}
           handleScroll={this.handleScroll}
+          addPlace={this.state.addPlace}
+          removePlace={this.state.removePlace}
           faveClick={this.faveClick}
+          deleteClick={this.deleteClick}
+          searchOn={this.state.searchOn}
         />}
 
-        {this.state.favouritePage && <Favourites 
-        favePlaces={this.state.favePlaces}/>}
+        {this.state.favouriteOn && <Favourites 
+        favePlaces={this.state.favePlaces}
+        deleteClick={this.deleteClick}
+        searchOn={this.state.searchOn}
+        />}
 
       </div>
     );

@@ -12,9 +12,8 @@ class ResultItem extends Component {
                     <div className="restaurantItem" key={index} >
                         <div className="restaurantImage">
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
-                            <button className="favourite" title="Add to favorites" onClick={(e) => this.props.faveClick(e, restaurantItem)}>
-                                {/* {console.log(restaurantItem)} */}
-                                <i className="fas fa-plus"></i>
+                            <button className="favourite" title="Add to favorites" onClick={this.props.searchOn? ((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name)) : ((e) => this.props.deleteClick(e, restaurantItem.name))}>
+                                <i className={this.props.searchOn ? "fas fa-plus" : "fas fa-minus"}></i>
                             </button>
                         </div>
 
