@@ -42,7 +42,10 @@ class App extends Component {
     dbref.on('value', (response) => {
       const newFavePlaces = [];
       const data = response.val();
-      const savedKeys = Object.keys(data);
+      let savedKeys = []
+      if (data!= null) {
+        savedKeys = Object.keys(data);
+      }
 
       for (let item in data) {
         newFavePlaces.push(data[item]);
@@ -182,6 +185,7 @@ class App extends Component {
     event.preventDefault();
     const dbRef = firebase.database().ref();
     dbRef.child(restaurantName).remove();
+    console.log(this.state.favePlaces)
   }
 
   // function to change state to render favourites page instead of search page
