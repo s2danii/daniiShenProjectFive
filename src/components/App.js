@@ -100,7 +100,8 @@ class App extends Component {
           thumb: item.restaurant.featured_image,
           address: item.restaurant.location.address,
           rating: item.restaurant.user_rating.aggregate_rating,
-          votes: item.restaurant.user_rating.votes
+          votes: item.restaurant.user_rating.votes,
+          cost: item.restaurant.price_range,
         }        
       });
 

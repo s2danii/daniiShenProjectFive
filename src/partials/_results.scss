@@ -65,6 +65,14 @@
     }
 }
 
+.costRank {
+    display: flex;
+
+    p {
+        padding: 0 1px;
+    }
+}
+
 .faveOverlay {
     position: absolute;
     top: 0;

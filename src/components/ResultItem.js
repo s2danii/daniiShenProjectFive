@@ -10,6 +10,21 @@ class ResultItem extends Component {
         }
     }
 
+    costRank = (priceRange) => {
+        let dollars = [];
+        for (let n = 1; n <= priceRange; n++) {
+            dollars.push(n)
+        }
+
+        return (
+            dollars.map((item, index) => {
+                return (
+                    <p> <i key={index} className="fas fa-dollar-sign"></i> </p>
+                )
+            })
+        )
+    }
+
     added = (searchedItem) => {
         return (this.props.savedKeys).includes(searchedItem)
     }
@@ -49,6 +64,9 @@ class ResultItem extends Component {
                             <h3>{restaurantItem.name}</h3>
                             <p><i className="fas fa-star"></i> {restaurantItem.rating} ({restaurantItem.votes} votes)</p>
                             <p>{restaurantItem.address}</p>
+                            <p className="costRank">
+                                {this.costRank(restaurantItem.cost)}
+                            </p>
                         </div>
                     </div>
                 );
@@ -58,4 +76,3 @@ class ResultItem extends Component {
 }
 
 export default ResultItem;
-
