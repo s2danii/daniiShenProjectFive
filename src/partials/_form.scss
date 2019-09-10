@@ -58,6 +58,7 @@
     color: white;
     border-radius: 20px;
     padding: 8px 0;
+    border: none;
     @include buttonShadow($greyShadow);
 
     @media (max-width: 700px) {

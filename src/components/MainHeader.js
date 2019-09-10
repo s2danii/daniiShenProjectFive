@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Egg from '../assets/egg.png';
 
 class MainHeader extends Component {
-    constructor () {
-        super ();
-    }
 
     render() {
         return (
@@ -27,17 +24,17 @@ class MainHeader extends Component {
                         </button>
                     </form>
                     <p>Or search by rating and price:</p>
-                    <a title="Search by rating"
+                    <button title="Search by rating"
                     onClick={(e) => this.props.handleClick(e, 'rating', 'desc')}
                     className="rating">
                         <i className="fas fa-star"></i>
-                    </a>
+                    </button>
 
-                    <a title="Search by cost"
+                    <button title="Search by cost"
                     onClick={(e) => this.props.handleClick(e, 'cost', 'asc')}
                     className="cost">
                         <i className="fas fa-dollar-sign"></i>
-                    </a>
+                    </button>
                 </div>
             </header>
         );

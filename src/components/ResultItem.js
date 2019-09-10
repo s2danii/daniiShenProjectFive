@@ -8,15 +8,21 @@ class ResultItem extends Component {
             this.props.restaurantArray.map((restaurantItem, index) => {
 
                 return (
+                    
+                    
                     <div className="restaurantItem" key={index} >
+                        
                         <div className="restaurantImage">
+                            {this.props.searchOn && (this.props.savedKeys).includes(restaurantItem.name) ?
+                                <div className="faveOverlay">
+                                    <p>Saved</p>
+                                </div> : ''}
+                            
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
 
                             {this.props.searchOn ? 
-                                <button className="favourite" title="Add to favourites" onClick={((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name))
-                                    }>
+                                <button className="favourite" title="Add to favourites" onClick={((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name))}>
                                     {(this.props.savedKeys).includes(restaurantItem.name) ? <i className="fas fa-heart"></i> : <i className="fas fa-plus"></i>}
-
                                 </button> : 
                                 <button className="favourite" title="Remove from favourites" onClick={((e) => this.props.deleteClick(e, restaurantItem.name))}>
                                     <i className="fas fa-minus"></i>
