@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ImagePlaceholder from '../assets/imagePlaceholder.jpg';
 
 class ResultItem extends Component {
-    
 
     render () {
         return (
@@ -12,9 +11,16 @@ class ResultItem extends Component {
                     <div className="restaurantItem" key={index} >
                         <div className="restaurantImage">
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
-                            <button className="favourite" title={this.props.searchOn? 'Add to favourites': 'Remove from favourites'} onClick={this.props.searchOn? ((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name)) : ((e) => this.props.deleteClick(e, restaurantItem.name))}>
-                                <i className={this.props.searchOn ? "fas fa-plus" : "fas fa-minus"}></i>
-                            </button>
+
+                            {this.props.searchOn ? 
+                                <button className="favourite" title="Add to favourites" onClick={((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name))
+                                    }>
+                                    {(this.props.savedKeys).includes(restaurantItem.name) ? <i className="fas fa-heart"></i> : <i className="fas fa-plus"></i>}
+
+                                </button> : 
+                                <button className="favourite" title="Remove from favourites" onClick={((e) => this.props.deleteClick(e, restaurantItem.name))}>
+                                    <i className="fas fa-minus"></i>
+                                </button>}
                         </div>
 
                         <div className="restaurantInfo">

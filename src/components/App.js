@@ -24,6 +24,7 @@ class App extends Component {
       addPlace: true,
       removePlace: false,
       axiosParams:[],
+      savedKeys:[],
     }
 
     this.resultsRef = React.createRef();
@@ -41,14 +42,16 @@ class App extends Component {
     dbref.on('value', (response) => {
       const newFavePlaces = [];
       const data = response.val();
+      const savedKeys = Object.keys(data);
 
       for (let item in data) {
         newFavePlaces.push(data[item]);
       }
 
       this.setState({
-        favePlaces: newFavePlaces
-      });
+        favePlaces: newFavePlaces,
+        savedKeys: savedKeys
+      });      
     })
   }
 
@@ -58,6 +61,13 @@ class App extends Component {
 
 // axios call to Zomato API to retrieve restaurant data based on user search
   getRestaurant = (userSearch, userSort, order) => {
+
+    // if statement to handle when user switches between filters
+    let startPoint = 0
+    if ((this.state.axiosParams).includes(userSort) && userSearch === '' && this.state.resultCount !== 0) {
+      startPoint = this.state.resultCount
+    }
+
     axios({
       method: 'Get',
       url: 'https://developers.zomato.com/api/v2.1/search?',
@@ -70,14 +80,13 @@ class App extends Component {
         entity_id: 89,
         entity_type: 'city',
         category: '8',
-        start: this.state.resultCount,
+        start: startPoint,
         sort: userSort,
         order: order,
         q: userSearch
       }
     }).then((res) => {
 
-      console.log(res)
       // filtering out any results with no votes
       const originalResults = res.data.restaurants.filter((item) => {
         return item.restaurant.user_rating.votes > 0
@@ -94,12 +103,17 @@ class App extends Component {
         }        
       });
 
-      console.log(restaurantResults)
+      let fullRestoList = restaurantResults
+  
+      if ((this.state.axiosParams).includes(this.state.userInput)) {
+        fullRestoList = this.state.searchResults.concat(restaurantResults);
+      } 
+      
 
       this.setState({
-        searchResults: this.state.searchResults.concat(restaurantResults),
+        searchResults: fullRestoList,
         visible: true,
-        resultCount: this.state.resultCount + 20,
+        resultCount: startPoint + 20,
         axiosParams: [userSearch, userSort, order]
       })
 
@@ -172,6 +186,7 @@ class App extends Component {
 
   favePage = (event) => {
     event.preventDefault();
+    window.scrollTo(0, 0)
     this.setState({
       searchOn: false,
       visible: false,
@@ -182,15 +197,22 @@ class App extends Component {
   // function to change state to render search page instead of favourite page
   searchPage = (event) => {
     event.preventDefault();
+    window.scrollTo(0, 0);
+    let existingSearch = false
+    if (this.state.axiosParams.length > 0) {
+      existingSearch = true;
+    }
+
     this.setState({
       searchOn: true,
+      visible: existingSearch,
       favouriteOn: false
     })
   }
 
   moreResults = (event) => {
     event.preventDefault();
-    console.log(this.state.axiosParams[0], this.state.axiosParams[1], this.state.axiosParams[2])
+
     this.getRestaurant(this.state.axiosParams[0], this.state.axiosParams[1], this.state.axiosParams[2]);
   }
 
@@ -207,6 +229,7 @@ class App extends Component {
 
         
           {this.state.searchOn && <MainHeader
+            headerRef={this.headerRef}
             userInput={this.state.userInput}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
@@ -227,6 +250,7 @@ class App extends Component {
           deleteClick={this.deleteClick}
           searchOn={this.state.searchOn}
           moreResults={this.moreResults}
+          savedKeys={this.state.savedKeys}
         />}
 
         {/* Favourites Page */}

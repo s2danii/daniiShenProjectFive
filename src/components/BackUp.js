@@ -8,9 +8,7 @@ class BackUpButton extends Component {
             onClick={() => {
                 let element = this.props.headerRef.current;
                 element.scrollIntoView({behavior: 'smooth', block: 'start'});
-            }
-    
-            }>
+            }}>
                 <i className="fas fa-arrow-up"></i>
             </button>
         )

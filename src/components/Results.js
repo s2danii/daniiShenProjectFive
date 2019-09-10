@@ -21,7 +21,8 @@ class Results extends Component {
                                 restaurantArray={this.props.searchResults}
                                 faveClick={this.props.faveClick}
                                 deleteClick={this.props.deleteClick}
-                                searchOn={this.props.searchOn}/>
+                                searchOn={this.props.searchOn}
+                                savedKeys={this.props.savedKeys}/>
                             </div>
                             <button className="moreResults" onClick={this.props.moreResults}>More results</button>
                         </div>
