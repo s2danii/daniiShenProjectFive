@@ -2,18 +2,27 @@ import React, {Component} from 'react';
 import ImagePlaceholder from '../assets/imagePlaceholder.jpg';
 
 class ResultItem extends Component {
+    constructor () {
+        super ();
+
+        this.state = {
+            clicked: false,
+        }
+    }
+
+    added = (searchedItem) => {
+        return (this.props.savedKeys).includes(searchedItem)
+    }
 
     render () {
         return (
             this.props.restaurantArray.map((restaurantItem, index) => {
-
                 return (
-                    
                     
                     <div className="restaurantItem" key={index} >
                         
                         <div className="restaurantImage">
-                            {this.props.searchOn && (this.props.savedKeys).includes(restaurantItem.name) ?
+                            {this.props.searchOn && this.added(restaurantItem.name) ?
                                 <div className="faveOverlay">
                                     <p>Saved</p>
                                 </div> : ''}
@@ -21,12 +30,19 @@ class ResultItem extends Component {
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
 
                             {this.props.searchOn ? 
-                                <button className="favourite" title="Add to favourites" onClick={((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name))}>
-                                    {(this.props.savedKeys).includes(restaurantItem.name) ? <i className="fas fa-heart"></i> : <i className="fas fa-plus"></i>}
-                                </button> : 
-                                <button className="favourite" title="Remove from favourites" onClick={((e) => this.props.deleteClick(e, restaurantItem.name))}>
-                                    <i className="fas fa-minus"></i>
-                                </button>}
+                                <div>
+                                    <label className= "visuallyHidden" htmlFor="faveButton">Click button to add restaurant to your favourites list.</label>
+                                    <button name="faveButton" className={this.added(restaurantItem.name)? 'clickedButton favourite' : 'favourite'} title="Add to favourites" onClick={((e) => this.props.faveClick(e, restaurantItem, restaurantItem.name))}>
+                                        {this.added(restaurantItem.name) ? <i aria-hidden className="fas fa-heart"></i> : <i aria-hidden className="fas fa-plus"></i>}
+                                    </button>
+                                </div> : 
+                                <div>
+                                    <label className="visuallyHidden" htmlFor="faveButton">Click button to remove restaurant from your favourites list.</label>
+                                    <button className="favourite" title="Remove from favourites" onClick={((e) => this.props.deleteClick(e, restaurantItem.name))}>
+                                        <i className="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                }
                         </div>
 
                         <div className="restaurantInfo">

@@ -64,7 +64,8 @@ class App extends Component {
 
     // if statement to handle when user switches between filters
     let startPoint = 0
-    if ((this.state.axiosParams).includes(userSort) && userSearch === '' && this.state.resultCount !== 0) {
+    let alreadySearched = (this.state.axiosParams).includes(userSort)
+    if (alreadySearched && userSearch === '' && this.state.resultCount !== 0) {
       startPoint = this.state.resultCount
     }
 
@@ -105,7 +106,7 @@ class App extends Component {
 
       let fullRestoList = restaurantResults
   
-      if ((this.state.axiosParams).includes(this.state.userInput)) {
+      if (alreadySearched) {
         fullRestoList = this.state.searchResults.concat(restaurantResults);
       } 
       

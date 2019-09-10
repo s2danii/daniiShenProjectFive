@@ -49,29 +49,7 @@
                 height: 100%;
                 object-fit: cover;
                 
-            }
-            
-        }
-
-        .favourite {
-            background: $red;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 45px;
-            width: 45px;
-            font-size: 20px;
-            border-radius: 50%;
-            border: none;
-            position: absolute;
-            bottom: -18px;
-            right: 8%;
-            @include buttonShadow($greyShadow);
-
-            &:hover {
-                background: rgb(236,140,140);
-            }
+            }    
         }
     }
 }
@@ -85,34 +63,6 @@
     p {
         color: $grey;
     }
-}
-
-.upButton {
-    background: $red;
-    color: white;
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    font-size: 2rem;
-    border: none;
-    position: fixed;
-    bottom: 8vh;
-    right: 15px;
-    z-index: 10;
-    @include buttonShadow($greyShadow);
-}
-
-.moreResults {
-    margin: 40px auto 0;
-    display: block;
-    padding: 10px 30px;
-    background: $red;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 700;
-    @include buttonShadow($greyShadow);
 }
 
 .faveOverlay {

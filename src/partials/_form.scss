@@ -47,21 +47,3 @@
         }
     }
 }
-
-.cost, .rating {
-    text-align: center;
-    font-size: 2rem;
-    width: 100px;
-    display: inline-block;
-    margin: 5px;
-    background: $red;
-    color: white;
-    border-radius: 20px;
-    padding: 8px 0;
-    border: none;
-    @include buttonShadow($greyShadow);
-
-    @media (max-width: 700px) {
-        @include buttonShadow($yellowShadow);
-    }
-}

@@ -12,28 +12,31 @@ class MainHeader extends Component {
                     <p>Find and save the top brunch spots in Toronto</p>
                     <p>(so you'll always have a back-up plan for your Sunday morning)</p>
                     <form className="searchForm" action="">
-                        <label id="searchBar" className="visuallyHidden">Search for a brunch restaurant here</label>
+                        <label htmlFor="searchBar" className="visuallyHidden">Search for a brunch restaurant here</label>
                         <input type="text"
-                        id="searchBar"
+                        name="searchBar"
                         title="Search"
                         onChange={this.props.handleChange}
                         value={this.props.userInput}
                         placeholder="Find me some brunch" />
-                        <button onClick={this.props.handleSubmit}>
-                            <i className="fas fa-search"></i>
+                        <label className="visuallyHidden" htmlFor="search">Click button to search for your query.</label>
+                        <button name="search" onClick={this.props.handleSubmit}>
+                            <i aria-hidden className="fas fa-search"></i>
                         </button>
                     </form>
                     <p>Or search by rating and price:</p>
-                    <button title="Search by rating"
+                    <label className="visuallyHidden" htmlFor="rating">Click button to search for all brunch restaurants based on rating.</label>
+                    <button name="rating" title="Search by rating"
                     onClick={(e) => this.props.handleClick(e, 'rating', 'desc')}
                     className="rating">
-                        <i className="fas fa-star"></i>
+                        <i aria-hidden className="fas fa-star"></i>
                     </button>
 
-                    <button title="Search by cost"
+                    <label className="visuallyHidden" htmlFor="cost">Click button to search for all brunch restaurants based on cost.</label>
+                    <button name="cost" title="Search by cost"
                     onClick={(e) => this.props.handleClick(e, 'cost', 'asc')}
                     className="cost">
-                        <i className="fas fa-dollar-sign"></i>
+                        <i aria-hidden className="fas fa-dollar-sign"></i>
                     </button>
                 </div>
             </header>
