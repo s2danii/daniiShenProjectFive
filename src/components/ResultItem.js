@@ -68,6 +68,26 @@ class ResultItem extends Component {
                                 {this.costRank(restaurantItem.cost)}
                             </p>
                         </div>
+
+                        {/* POP UP MODAL WITH RESTAURANT INFO */}
+                        <div className="infoPopUp">
+                            <div className="restaurantImage">
+                                <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
+                            </div>
+                            <div className="restaurantInfo">
+                                <h3>{restaurantItem.name}</h3>
+                                <p><i className="fas fa-star"></i> {restaurantItem.rating} ({restaurantItem.votes} votes)</p>
+                                <p className="costRank">
+                                    {this.costRank(restaurantItem.cost)}
+                                </p>
+                                <p>{restaurantItem.cuisine}</p>
+                                <p>{restaurantItem.address}</p>
+                                <p>{restaurantItem.timing}</p>
+                                <a href={restaurantItem.menu}>See Menu</a>
+                                <p>{restaurantItem.phone}</p>
+                            </div>
+
+                        </div>
                     </div>
                 );
             })
