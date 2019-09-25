@@ -105,6 +105,12 @@ class App extends Component {
           rating: item.restaurant.user_rating.aggregate_rating,
           votes: item.restaurant.user_rating.votes,
           cost: item.restaurant.price_range,
+
+          cusine: item.restaurant.cuisine,
+          menu: item.restaurant.menu_url,
+          phone: item.restaurant.phone_numbers,
+          url: item.restaurant.url,
+          timing: item.restaurant.timings
         }        
       });
 
