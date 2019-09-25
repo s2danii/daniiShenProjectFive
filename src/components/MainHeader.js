@@ -20,7 +20,7 @@ class MainHeader extends Component {
                         value={this.props.userInput}
                         placeholder="Find me some brunch" />
                         <label className="visuallyHidden" htmlFor="search">Click button to search for your query.</label>
-                        <button name="search" onClick={this.props.handleSubmit}>
+                        <button className="visuallyHidden" name="search" onClick={this.props.handleSubmit}>
                             <i aria-hidden className="fas fa-search"></i>
                         </button>
                     </form>

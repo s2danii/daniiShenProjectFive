@@ -176,8 +176,9 @@ class App extends Component {
 
   faveClick = (event, restaurantItem, restaurantName) => {
     event.preventDefault();
+    console.log(restaurantItem)
     const dbRef = firebase.database().ref(restaurantName);
-    dbRef.update({...restaurantItem})
+    dbRef.update(restaurantItem)
   }
 
   // function to remove restaurant from favourite list in firebase on click of button
