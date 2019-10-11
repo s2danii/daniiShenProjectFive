@@ -42,7 +42,10 @@ class App extends Component {
     dbref.on('value', (response) => {
       const newFavePlaces = [];
       const data = response.val();
-      const savedKeys = Object.keys(data);
+      let savedKeys = []
+      if (data!= null) {
+        savedKeys = Object.keys(data);
+      }
 
       for (let item in data) {
         newFavePlaces.push(data[item]);
@@ -64,8 +67,8 @@ class App extends Component {
 
     // if statement to handle when user switches between filters
     let startPoint = 0
-    let alreadySearched = (this.state.axiosParams).includes(userSort)
-    if (alreadySearched && userSearch === '' && this.state.resultCount !== 0) {
+    let alreadySearched = (this.state.axiosParams).includes(userSort) && (this.state.axiosParams).includes(userSearch)
+    if (alreadySearched && this.state.resultCount !== 0) {
       startPoint = this.state.resultCount
     }
 
@@ -105,8 +108,8 @@ class App extends Component {
         }        
       });
 
+
       let fullRestoList = restaurantResults
-  
       if (alreadySearched) {
         fullRestoList = this.state.searchResults.concat(restaurantResults);
       } 
@@ -173,8 +176,9 @@ class App extends Component {
 
   faveClick = (event, restaurantItem, restaurantName) => {
     event.preventDefault();
+    console.log(restaurantItem)
     const dbRef = firebase.database().ref(restaurantName);
-    dbRef.update({...restaurantItem})
+    dbRef.update(restaurantItem)
   }
 
   // function to remove restaurant from favourite list in firebase on click of button
@@ -182,6 +186,7 @@ class App extends Component {
     event.preventDefault();
     const dbRef = firebase.database().ref();
     dbRef.child(restaurantName).remove();
+    console.log(this.state.favePlaces)
   }
 
   // function to change state to render favourites page instead of search page
