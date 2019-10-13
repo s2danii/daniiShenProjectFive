@@ -6,7 +6,7 @@ class ResultItem extends Component {
         super ();
 
         this.state = {
-            clicked: false,
+            modalItem: []
         }
     }
 
@@ -29,21 +29,33 @@ class ResultItem extends Component {
         return (this.props.savedKeys).includes(searchedItem)
     }
 
+    moreInfo = (event, restaurantItem) => {
+        event.preventDefault();
+        let modalItem = [restaurantItem]
+
+        this.setState({
+            modalItem
+        })
+    }
+
+    closeModal = (event) => {
+        event.preventDefault();
+        this.setState({
+            modalItem: []
+        })
+    }
+
     render () {
         return (
             this.props.restaurantArray.map((restaurantItem, index) => {
-                return (
-                    
-                    <div className="restaurantItem" key={index} >
-                        
+                return (                    
+                    <div className="restaurantItem" key={index} >                        
                         <div className="restaurantImage">
                             {this.props.searchOn && this.added(restaurantItem.name) ?
                                 <div className="faveOverlay">
                                     <p>Saved</p>
-                                </div> : ''}
-                            
+                                </div> : ''}                            
                             <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
-
                             {this.props.searchOn ? 
                                 <div>
                                     <label className= "visuallyHidden" htmlFor="faveButton">Click button to add restaurant to your favourites list.</label>
@@ -67,6 +79,33 @@ class ResultItem extends Component {
                             <p className="costRank">
                                 {this.costRank(restaurantItem.cost)}
                             </p>
+                            <button className="moreInfo" onClick={(e) => this.moreInfo(e, restaurantItem)}>More info</button>
+                        </div>
+
+                        {/* POP UP MODAL WITH RESTAURANT INFO */}
+                        <div className={(this.state.modalItem).includes(restaurantItem) ? 'infoOverlay' : 'infoOverlay popUpOff'}
+                        onClick={this.closeModal}>
+                            <div className="infoPopUp">                                
+                                <div className="popUpImage">
+                                    <img src={restaurantItem.thumb ? restaurantItem.thumb : ImagePlaceholder} alt="" />
+                                </div>
+                                
+                                <div className="restaurantInfo">
+                                    <button className="closeButton" onClick={this.closeModal}><i class="fas fa-times"></i></button>
+                                    <div>
+                                        <h3>{restaurantItem.name}</h3>
+                                        <p><i className="fas fa-star"></i> {restaurantItem.rating} ({restaurantItem.votes} votes)</p>
+                                        <p>{restaurantItem.cuisine}</p>
+                                        <p>{restaurantItem.address}</p>
+                                        <p>{restaurantItem.timing}</p>
+                                        <p>{restaurantItem.phone}</p>
+                                        <p className="costRank">
+                                            {this.costRank(restaurantItem.cost)}
+                                        </p>
+                                    </div>
+                                    <a className="menu" href={restaurantItem.menu} target="_blank">See Menu</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 );

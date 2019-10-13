@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import BackUpButton from './BackUp';
 import ResultItem from './ResultItem';
 
-
 class Results extends Component {
-
         render () {
             return (
                 <div>
@@ -22,7 +20,8 @@ class Results extends Component {
                                 faveClick={this.props.faveClick}
                                 deleteClick={this.props.deleteClick}
                                 searchOn={this.props.searchOn}
-                                savedKeys={this.props.savedKeys}/>
+                                savedKeys={this.props.savedKeys}
+                                popUp={this.props.popUp}/>
                             </div>
                             <button className="moreResults" onClick={this.props.moreResults}>More results</button>
                         </div>
