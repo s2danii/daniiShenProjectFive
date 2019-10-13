@@ -25,6 +25,7 @@ class App extends Component {
       removePlace: false,
       axiosParams:[],
       savedKeys:[],
+      popUp: false
     }
 
     this.resultsRef = React.createRef();
@@ -98,6 +99,8 @@ class App extends Component {
 
       // returning an object that holds information about each restaurant
       const restaurantResults = originalResults.map((item) => {
+
+        let timing = (item.restaurant.timings).replace(/,/g, '$&\n')
         return {
           name: item.restaurant.name,
           thumb: item.restaurant.featured_image,
@@ -105,22 +108,17 @@ class App extends Component {
           rating: item.restaurant.user_rating.aggregate_rating,
           votes: item.restaurant.user_rating.votes,
           cost: item.restaurant.price_range,
-
-          cusine: item.restaurant.cuisine,
           menu: item.restaurant.menu_url,
           phone: item.restaurant.phone_numbers,
-          url: item.restaurant.url,
-          timing: item.restaurant.timings
+          timing
         }        
       });
-
 
       let fullRestoList = restaurantResults
       if (alreadySearched) {
         fullRestoList = this.state.searchResults.concat(restaurantResults);
       } 
       
-
       this.setState({
         searchResults: fullRestoList,
         visible: true,
@@ -130,8 +128,7 @@ class App extends Component {
 
       if (this.state.resultCount === 20) {
         this.smoothScroll();
-      }
-      
+      }      
     })
   }
 
@@ -166,7 +163,6 @@ class App extends Component {
   // function to calculate user's scroll height to time when the back up button will appear
   handleScroll = () => {
     let element = this.resultsRef.current;
-
     if (element && window.pageYOffset > element.offsetTop) {
       this.setState({
           backUp: true
@@ -182,7 +178,6 @@ class App extends Component {
 
   faveClick = (event, restaurantItem, restaurantName) => {
     event.preventDefault();
-    console.log(restaurantItem)
     const dbRef = firebase.database().ref(restaurantName);
     dbRef.update(restaurantItem)
   }
@@ -192,11 +187,9 @@ class App extends Component {
     event.preventDefault();
     const dbRef = firebase.database().ref();
     dbRef.child(restaurantName).remove();
-    console.log(this.state.favePlaces)
   }
 
   // function to change state to render favourites page instead of search page
-
   favePage = (event) => {
     event.preventDefault();
     window.scrollTo(0, 0)
@@ -225,7 +218,6 @@ class App extends Component {
 
   moreResults = (event) => {
     event.preventDefault();
-
     this.getRestaurant(this.state.axiosParams[0], this.state.axiosParams[1], this.state.axiosParams[2]);
   }
 
@@ -240,17 +232,18 @@ class App extends Component {
         searchPage={this.searchPage}
         searchOn={this.state.searchOn}/>
 
-        
-          {this.state.searchOn && <MainHeader
-            headerRef={this.headerRef}
-            userInput={this.state.userInput}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            handleClick={this.handleClick}
-          />}
+        {this.state.searchOn && 
+          <MainHeader
+          headerRef={this.headerRef}
+          userInput={this.state.userInput}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleClick={this.handleClick}
+        />}        
           
         {/* Search Results Section */}
-        {this.state.visible && <Results
+        {this.state.visible && 
+          <Results
           resultsRef={this.resultsRef}
           headerRef={this.headerRef}
           searchResults={this.state.searchResults}
@@ -264,19 +257,19 @@ class App extends Component {
           searchOn={this.state.searchOn}
           moreResults={this.moreResults}
           savedKeys={this.state.savedKeys}
+          popUp={this.state.popUp}
         />}
 
         {/* Favourites Page */}
-        {this.state.favouriteOn && <Favourites 
-        favePlaces={this.state.favePlaces}
-        deleteClick={this.deleteClick}
-        searchOn={this.state.searchOn}
+        {this.state.favouriteOn && 
+          <Favourites 
+          favePlaces={this.state.favePlaces}
+          deleteClick={this.deleteClick}
+          searchOn={this.state.searchOn}
         />}
-
       </div>
     );
   }
-
 }
 
 export default App;

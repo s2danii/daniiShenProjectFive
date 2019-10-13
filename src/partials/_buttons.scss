@@ -47,10 +47,14 @@
     font-size: 1.8rem;
     font-weight: 700;
     @include buttonShadow($greyShadow);
+
+    &:hover {
+        background: rgb(236,140,140);
+    }
 }
 
 // button to add restaurant to favourite
-.favourite {
+.favourite, .closeButton {
     background: $red;
     color: white;
     display: flex;
@@ -73,4 +77,5 @@
 
 .clickedButton {
     background: rgb(236,140,140);
+    pointer-events: none;
 }

@@ -23,14 +23,12 @@ class Favourites extends Component {
                                 deleteClick={this.props.deleteClick}
                                 searchOn={this.props.searchOn}/>
                         </div>
-
                     </div>
                 </section>
                 <footer>
                     <p>Copyright stuffbydanii 2019</p>
                 </footer>
-            </div>
-            
+            </div>            
         )
     }
 }
