@@ -1,0 +1,81 @@
+// STYLING FOR ALL BUTTONS
+
+// button on header for cost and rating
+.cost, .rating {
+    text-align: center;
+    font-size: 2rem;
+    width: 100px;
+    display: inline-block;
+    margin: 5px;
+    background: $red;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 0;
+    border: none;
+    @include buttonShadow($greyShadow);
+
+    @media (max-width: 700px) {
+        @include buttonShadow($yellowShadow);
+    }
+}
+
+// button to bring user back up to top of page
+.upButton {
+    background: $red;
+    color: white;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: 2rem;
+    border: none;
+    position: fixed;
+    bottom: 8vh;
+    right: 15px;
+    z-index: 10;
+    @include buttonShadow($greyShadow);
+}
+
+// button to show more results
+.moreResults {
+    margin: 40px auto 0;
+    display: block;
+    padding: 10px 30px;
+    background: $red;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    @include buttonShadow($greyShadow);
+
+    &:hover {
+        background: rgb(236,140,140);
+    }
+}
+
+// button to add restaurant to favourite
+.favourite, .closeButton {
+    background: $red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 45px;
+    font-size: 20px;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    bottom: -18px;
+    right: 8%;
+    @include buttonShadow($greyShadow);
+
+    &:hover {
+        background: rgb(236,140,140);
+    }
+}
+
+.clickedButton {
+    background: rgb(236,140,140);
+    pointer-events: none;
+}

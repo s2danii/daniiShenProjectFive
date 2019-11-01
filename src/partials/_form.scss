@@ -1,0 +1,49 @@
+// SEARCH FORM IN MAIN HEADER STYLING
+
+.searchForm {
+    input[type=text] {
+        padding: 10px 30px;
+        width: 30%;
+        margin: 3% 0 2%;
+        border-radius: 18px;
+        border: 1px solid $grey;
+        height: 40px;
+        font-size: 1.6rem;
+        text-transform: capitalize;
+
+        @media (max-width: 1000px) {
+            width: 230px;
+        }
+
+        @media (max-width: 700px) {
+            width: 50%;
+        }
+
+        @media (max-width: 550px) {
+            display: block;
+            width: 90%;
+            margin: 3% auto 2%;
+            text-align: center;
+        }
+    }
+
+    button {
+        background: $red;
+        height: 40px;
+        border: none;
+        width: 70px;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: white;
+        font-size: 1.8rem;
+        @include buttonShadow($greyShadow);
+
+        @media (max-width: 700px) {
+            @include buttonShadow($yellowShadow);
+        }
+
+        @media (max-width: 500px) {
+            width: 100px;
+        }
+    }
+}

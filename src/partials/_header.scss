@@ -1,0 +1,119 @@
+// GENERAL HEADER STYLING
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper {
+        @media (max-width: 1000px) {
+            margin-left: 100px;
+        }
+
+        @media (max-width: 700px) {
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
+}
+
+.egg {
+    width: 150px;
+    padding-top: 40px;
+
+    @media (max-width: 500px) {
+        width: 125px;
+    }
+}
+
+.mainHeader .egg {
+    display: none;
+
+    @media (max-width: 700px) {
+        display: inline-block;
+    }
+
+}
+
+// MAIN PAGE HEADER
+
+.mainHeader {
+    background: linear-gradient(to right, rgba(242,242,242, 0.8) 50%, rgba(242,242,242,0)), url(../assets/header.jpg);
+    transition: all ease-out 1.5s;
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    border-bottom-right-radius: 20%;
+
+
+    @media (max-width: 1000px) {
+        background: linear-gradient(to right, rgba(242,242,242, 0.9) 70%, rgba(242,242,242,0)), url(../assets/header.jpg);
+        background-position: right;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    @media (max-width: 700px) {
+        background: rgb(255,214,114);
+        background-attachment: fixed;
+    }
+
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+
+        @media (max-width: 700px) {
+            display: none;
+        }
+    }
+
+    p {
+        color: $grey;
+        font-size: calc(1.6rem + (18 - 16)*(100vw - 700px)/(1280 - 700));
+
+        @media (max-width: 700px) {
+            font-size: 1.6rem;
+
+            &:nth-of-type(2) {
+                display: none;
+            }
+        }
+
+        
+    }
+}
+
+
+// FAVOURITE PAGE HEADER
+
+.faveHeader {
+    background: rgb(255,214,114);
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10vh;
+
+    }
+
+    h2 {
+        text-align: center;
+        padding-top: 30px;
+        font-size: 3rem;
+        text-transform: capitalize;
+
+        &+ p{
+            text-align: center;
+            font-size: 1.6rem;
+            padding-bottom: 50px;
+        }
+    }
+}
+
+
+
