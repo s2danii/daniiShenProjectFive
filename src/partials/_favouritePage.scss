@@ -2,7 +2,8 @@
 
 .favePage {
     background: rgb(255,214,114);
-
+    position: relative;
+    min-height: 100vh;
 }
 
 .faveSection {
@@ -11,6 +12,7 @@
     border-radius: 120px 120px 0 0;
     margin-left: 62px;
     box-shadow: 0 -3px 10px rgb(206,172,91);
+    min-height: calc(50vh - 47px);
     
     @media (max-width: 700px) {
         border-radius: 80px 80px 0 0;

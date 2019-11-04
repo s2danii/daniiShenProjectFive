@@ -45,37 +45,7 @@ class App extends Component {
 
     // firebase call to retrieve data from database
     this.loadFirebase();
-
-
-  //   const dbref = firebase.database().ref();
-  //   dbref.on('value', (response) => {
-  //     const newFavePlaces = [];
-  //     const data = response.val();
-  //     let savedKeys = []
-  //     if (data!= null) {
-  //       savedKeys = Object.keys(data);
-  //     }
-
-  //     for (let item in data) {
-  //       newFavePlaces.push(data[item]);
-  //     }
-
-  //     this.setState({
-  //       favePlaces: newFavePlaces,
-  //       savedKeys: savedKeys
-  //     });      
-  //   })
-  // }
-}
-
-  // componentDidUpdate () {
-
-  //   if (this.state.userID) {
-  //     this.loadFirebase();
-  //   }
-    
-  // }
-
+  }
 
   componentWillUnmount () {
   window.removeEventListener('scroll', this.handleScroll);
@@ -245,13 +215,6 @@ class App extends Component {
   }
 
   // function to add restaurant to favourite list in firebase on click of button
-
-  // faveClick = (event, restaurantItem, restaurantName) => {
-  //   event.preventDefault();
-  //   const dbRef = firebase.database().ref(restaurantName);
-  //   dbRef.update(restaurantItem)
-  // }
-
   faveClick = (event, restaurantItem, restaurantName) => {
     event.preventDefault();
     const dbRef = this.state.userID ? firebase.database().ref(`users/${this.state.userID}/${restaurantName}`) : firebase.database().ref(`guest/${restaurantName}`);
@@ -259,12 +222,6 @@ class App extends Component {
   }
 
   // function to remove restaurant from favourite list in firebase on click of button
-  // deleteClick = (event, restaurantName) => {
-  //   event.preventDefault();
-  //   const dbRef = firebase.database().ref();
-  //   dbRef.child(restaurantName).remove();
-  // }
-
   deleteClick = (event, restaurantName) => {
     event.preventDefault();
     const dbRef = this.state.userID ? firebase.database().ref(`users/${this.state.userID}`) : firebase.database().ref(`guest`);

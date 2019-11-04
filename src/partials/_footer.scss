@@ -5,4 +5,11 @@ footer {
     text-align: center;
     color: white;
     padding: 1px;
+    height: 47px;
+}
+
+.favePage footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
