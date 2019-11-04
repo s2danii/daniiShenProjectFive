@@ -7,6 +7,9 @@ import Results from './Results';
 import Favourites from './Favourites';
 import firebase from './firebase';
 
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth()
+
 class App extends Component {
   constructor () {
     super ();
@@ -25,7 +28,9 @@ class App extends Component {
       removePlace: false,
       axiosParams:[],
       savedKeys:[],
-      popUp: false
+      popUp: false,
+      user: null,
+      userID: ''
     }
 
     this.resultsRef = React.createRef();
@@ -39,16 +44,58 @@ class App extends Component {
     window.addEventListener('scroll', this.handleScroll);
 
     // firebase call to retrieve data from database
-    const dbref = firebase.database().ref();
+    this.loadFirebase();
+
+
+  //   const dbref = firebase.database().ref();
+  //   dbref.on('value', (response) => {
+  //     const newFavePlaces = [];
+  //     const data = response.val();
+  //     let savedKeys = []
+  //     if (data!= null) {
+  //       savedKeys = Object.keys(data);
+  //     }
+
+  //     for (let item in data) {
+  //       newFavePlaces.push(data[item]);
+  //     }
+
+  //     this.setState({
+  //       favePlaces: newFavePlaces,
+  //       savedKeys: savedKeys
+  //     });      
+  //   })
+  // }
+}
+
+  // componentDidUpdate () {
+
+  //   if (this.state.userID) {
+  //     this.loadFirebase();
+  //   }
+    
+  // }
+
+
+  componentWillUnmount () {
+  window.removeEventListener('scroll', this.handleScroll);
+}
+
+// firebase data
+  loadFirebase = () => {
+    let dbref = this.state.userID ? firebase.database().ref(`users/${this.state.userID}`) : firebase.database().ref(`guest`);
+    
     dbref.on('value', (response) => {
-      const newFavePlaces = [];
-      const data = response.val();
+      let newFavePlaces = [];
+      let data = response.val();
+      
       let savedKeys = []
       if (data!= null) {
-        savedKeys = Object.keys(data);
+        savedKeys = Object.keys(data);        
       }
 
       for (let item in data) {
+        console.log(item)
         newFavePlaces.push(data[item]);
       }
 
@@ -58,10 +105,30 @@ class App extends Component {
       });      
     })
   }
+ 
 
-  componentWillUnmount () {
-  window.removeEventListener('scroll', this.handleScroll);
-}
+// google authorization
+  login = () => {
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user,
+          userID: user.uid
+        });
+
+        this.loadFirebase();
+      });
+  }
+
+  logout = () => {
+    auth.signOut()
+    .then(() => {
+      this.setState({
+        user: null
+      });
+    });
+  }
 
 // axios call to Zomato API to retrieve restaurant data based on user search
   getRestaurant = (userSearch, userSort, order) => {
@@ -176,16 +243,29 @@ class App extends Component {
 
   // function to add restaurant to favourite list in firebase on click of button
 
+  // faveClick = (event, restaurantItem, restaurantName) => {
+  //   event.preventDefault();
+  //   const dbRef = firebase.database().ref(restaurantName);
+  //   dbRef.update(restaurantItem)
+  // }
+
   faveClick = (event, restaurantItem, restaurantName) => {
     event.preventDefault();
-    const dbRef = firebase.database().ref(restaurantName);
+    const dbRef = this.state.userID ? firebase.database().ref(`users/${this.state.userID}/${restaurantName}`) : firebase.database().ref(`guest/${restaurantName}`);
     dbRef.update(restaurantItem)
   }
 
   // function to remove restaurant from favourite list in firebase on click of button
+  // deleteClick = (event, restaurantName) => {
+  //   event.preventDefault();
+  //   const dbRef = firebase.database().ref();
+  //   dbRef.child(restaurantName).remove();
+  // }
+
   deleteClick = (event, restaurantName) => {
     event.preventDefault();
-    const dbRef = firebase.database().ref();
+    const dbRef = this.state.userID ? firebase.database().ref(`users/${this.state.userID}`) : firebase.database().ref(`guest`);
+    console.log(dbRef.child(restaurantName))
     dbRef.child(restaurantName).remove();
   }
 
@@ -230,7 +310,8 @@ class App extends Component {
         <Nav 
         favePage={this.favePage}
         searchPage={this.searchPage}
-        searchOn={this.state.searchOn}/>
+        searchOn={this.state.searchOn}
+        login={this.login}/>
 
         {this.state.searchOn && 
           <MainHeader
