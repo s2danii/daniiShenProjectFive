@@ -10,7 +10,7 @@ class Favourites extends Component {
                 <header className="faveHeader">
                     <div className="wrapper">
                         <img className="egg" src={Egg} alt="" />
-                        <h2>Your saved places</h2>
+                        <h2>{this.props.user ? `${this.props.user.displayName}'s` : `Community`} saved places</h2>
                         <p>A place to come back to when you can't decide on where to go for Sunday brunch</p>
                     </div>
                 </header>

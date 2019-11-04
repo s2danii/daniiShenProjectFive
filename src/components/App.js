@@ -125,8 +125,11 @@ class App extends Component {
     auth.signOut()
     .then(() => {
       this.setState({
-        user: null
+        user: null,
+        userID: ''
       });
+
+      this.loadFirebase();
     });
   }
 
@@ -311,7 +314,9 @@ class App extends Component {
         favePage={this.favePage}
         searchPage={this.searchPage}
         searchOn={this.state.searchOn}
-        login={this.login}/>
+        login={this.login}
+        userID={this.state.userID}
+        logout={this.logout}/>
 
         {this.state.searchOn && 
           <MainHeader
@@ -347,6 +352,7 @@ class App extends Component {
           favePlaces={this.state.favePlaces}
           deleteClick={this.deleteClick}
           searchOn={this.state.searchOn}
+          user={this.state.user}
         />}
       </div>
     );
