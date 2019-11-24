@@ -98,7 +98,6 @@
 }
 
 .infoPopUp {
-    // position: relative;
     background: white;
     width: 80%;
     max-width: 720px;    
@@ -164,17 +163,6 @@
         
     }
 }
-
-.popUpOff.infoOverlay {
-    transition: opacity 0.5s;
-    display: none;
-    height: 0;
-
-    .infoPopUp {
-        opacity: 0;
-    }
-}
-
 
 .infoPopUp {
     z-index: 100;    

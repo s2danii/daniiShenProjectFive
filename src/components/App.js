@@ -65,7 +65,6 @@ class App extends Component {
       }
 
       for (let item in data) {
-        console.log(item)
         newFavePlaces.push(data[item]);
       }
 
@@ -225,7 +224,6 @@ class App extends Component {
   deleteClick = (event, restaurantName) => {
     event.preventDefault();
     const dbRef = this.state.userID ? firebase.database().ref(`users/${this.state.userID}`) : firebase.database().ref(`guest`);
-    console.log(dbRef.child(restaurantName))
     dbRef.child(restaurantName).remove();
   }
 

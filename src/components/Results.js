@@ -15,13 +15,18 @@ class Results extends Component {
                             <h2>{(this.props.searchResults.length > 0)? 'Your brunch results' : 'Sorry No results found'}</h2>
                             <p>Based on '{this.props.userInput}'</p>
                             <div className="resultsGrid">
-                                <ResultItem
-                                restaurantArray={this.props.searchResults}
-                                faveClick={this.props.faveClick}
-                                deleteClick={this.props.deleteClick}
-                                searchOn={this.props.searchOn}
-                                savedKeys={this.props.savedKeys}
-                                popUp={this.props.popUp}/>
+                                {this.props.searchResults.map((restaurantItem, index) => { 
+                                    return (
+                                        <ResultItem
+                                        restaurantItem={restaurantItem}
+                                        index={index}
+                                        faveClick={this.props.faveClick}
+                                        deleteClick={this.props.deleteClick}
+                                        searchOn={this.props.searchOn}
+                                        savedKeys={this.props.savedKeys}
+                                        popUp={this.props.popUp}/>
+                                    )
+                                })}
                             </div>
                             <button className="moreResults" onClick={this.props.moreResults}>More results</button>
                         </div>

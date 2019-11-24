@@ -18,10 +18,15 @@ class Favourites extends Component {
                     <div className="wrapper">
                         {this.props.favePlaces.length < 1 && <p>No items saved yet!</p>}
                         <div className="faveGrid">
-                            <ResultItem
-                                restaurantArray={this.props.favePlaces}
-                                deleteClick={this.props.deleteClick}
-                                searchOn={this.props.searchOn}/>
+                            {this.props.favePlaces.map((restaurantItem, index) => {
+                                return (
+                                    <ResultItem
+                                    restaurantItem={restaurantItem}
+                                    index={index}
+                                    deleteClick={this.props.deleteClick}
+                                    searchOn={this.props.searchOn}/>
+                                )
+                            })}
                         </div>
                     </div>
                 </section>
